@@ -7,14 +7,27 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class LottoResult {
+    private static final int MIN_NUMBER_RANGE = 1;
+    private static final int MAX_NUMBER_RANGE = 45;
     private final List<Lotto> lottos;
     private final List<Integer> winningLotto;
     private final int bonusNumber;
 
     public LottoResult(List<Lotto> generatedLotto, List<Integer> winningLotto, int bonusNumber) {
+        validateBonusNumber(bonusNumber);
         this.lottos = generatedLotto;
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateBonusNumber(int bonusNumber) {
+        if(bonusNumber < MIN_NUMBER_RANGE || bonusNumber > MAX_NUMBER_RANGE) {
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_RANGE.getMessage());
+        }
+
+        if(winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE.getMessage());
+        }
     }
 
     /*
