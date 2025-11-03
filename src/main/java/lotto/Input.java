@@ -3,9 +3,15 @@ package lotto;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-    public String getLottoPurchaseAmount(){
+    public int getLottoPurchaseAmount(){
         System.out.println("구입 금액을 입력해주세요.");
-        return Console.readLine();
+        String input =  Console.readLine();
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.PURCHASE_NOT_NUMBER.getMessage());
+        }
     }
 
     public String getLottoNumber() {
@@ -13,8 +19,14 @@ public class Input {
         return Console.readLine();
     }
 
-    public String getBonusNumber() {
+    public int getBonusNumber() {
         System.out.println("보너스 번호를 입력해 주세요.");
-        return Console.readLine();
+        String input = Console.readLine();
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_NOT_NUMBER.getMessage());
+        }
     }
 }
