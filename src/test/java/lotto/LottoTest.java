@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -21,5 +22,34 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @DisplayName("로또 번호의 개수가 6개 미만이면 예외가 발생한다.")
+    @Test
+    void 로또_번호의_개수가_6개_미만이면_예외가_발생한다() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호가 1보다 작으면 예외가 발생한다.")
+    @Test
+    void 로또_번호가_1보다_작으면_예외가_발생한다() {
+        assertThatThrownBy(() -> new Lotto(List.of(-1, 0, 1, 2, 3, 4)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호가 45보다 크면 예외가 발생한다.")
+    @Test
+    void 로또_번호가_45보다_크면_예외가_발생한다() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호를 정렬하여 반환한다.")
+    @Test
+    void 로또_번호를_정렬하여_반환한다() {
+        Lotto lotto = new Lotto(List.of(45, 1, 30, 15, 20, 10));
+
+        List<Integer> sortedNumbers = lotto.getSortedNumber();
+
+        assertThat(sortedNumbers).containsExactly(1, 10, 15, 20, 30, 45);
+    }
 }
