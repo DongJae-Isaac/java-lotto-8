@@ -14,13 +14,13 @@ public class LottoResult {
     private final int bonusNumber;
 
     public LottoResult(List<Lotto> generatedLotto, List<Integer> winningLotto, int bonusNumber) {
-        validateBonusNumber(bonusNumber);
+        validateBonusNumber(bonusNumber, winningLotto);
         this.lottos = generatedLotto;
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumber(int bonusNumber) {
+    private void validateBonusNumber(int bonusNumber, List<Integer> winningLotto) {
         if(bonusNumber < MIN_NUMBER_RANGE || bonusNumber > MAX_NUMBER_RANGE) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_RANGE.getMessage());
         }
