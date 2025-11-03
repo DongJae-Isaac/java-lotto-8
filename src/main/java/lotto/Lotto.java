@@ -1,5 +1,7 @@
     package lotto;
 
+    import java.util.ArrayList;
+    import java.util.Collections;
     import java.util.HashSet;
     import java.util.List;
     import java.util.Set;
@@ -19,6 +21,12 @@
 
         public List<Integer> getNumbers() {
             return numbers;
+        }
+
+        public List<Integer> getSortedNumber() {
+            List<Integer> sorted = new ArrayList<>(numbers);
+            Collections.sort(sorted);
+            return sorted;
         }
 
         private void validateSize(List<Integer> numbers) {
