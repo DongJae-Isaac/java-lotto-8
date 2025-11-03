@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class LottoResult {
     private final List<Lotto> lottos;
@@ -37,20 +38,22 @@ public class LottoResult {
     }
 
     // 총 당첨금 구하기
-    public double calculateTotalPrize() {
+    public long calculateTotalPrize() {
         Map<Rank, Integer> ranks = calculateLottoRank();
         long totalPrize = 0;
 
-        for (Rank rank : ranks.keySet()) {
-            int count = ranks.get(rank);
-            long prize = rank.getPrize();
+        for (Entry<Rank, Integer> rankEntry : ranks.entrySet()) {
+            Rank rankKey = rankEntry.getKey();
+            int count = rankEntry.getValue();
+            long prize = rankKey.getPrize();
             totalPrize += count * prize;
         }
         return totalPrize;
     }
 
     public double calculateTotalYield(int lottoPurchaseAmount) {
-        return (calculateTotalPrize()/ lottoPurchaseAmount) * 100;
+        long totalPrize = calculateTotalPrize();
+        return (double) totalPrize / lottoPurchaseAmount * 100;
     }
 
     private Rank determineRank(int matchCount, boolean hasBonus) {
