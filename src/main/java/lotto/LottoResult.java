@@ -49,6 +49,10 @@ public class LottoResult {
         return totalPrize;
     }
 
+    public double calculateTotalYield(int lottoPurchaseAmount) {
+        return (calculateTotalPrize()/ lottoPurchaseAmount) * 100;
+    }
+
     private Rank determineRank(int matchCount, boolean hasBonus) {
         if (matchCount == 6) return Rank.FIRST;
         if (matchCount == 5 && hasBonus) return Rank.SECOND;
