@@ -13,6 +13,7 @@ public class Printer {
 
     public void printGeneratedLotto(List<Lotto> generatedLottos) {
         int LOTTO_PRICE = 1000;
+        System.out.println();
         System.out.println(lottoPurchaseAmount/ LOTTO_PRICE + "개를 구매했습니다.");
         for (Lotto generatedLotto : generatedLottos) {
             System.out.println(generatedLotto.getSortedNumber());
@@ -22,6 +23,7 @@ public class Printer {
     public void printLottoResult(LottoResult lottoResult) {
         Map<Rank, Integer> lottoRank = lottoResult.calculateLottoRank();
 
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---");
 
