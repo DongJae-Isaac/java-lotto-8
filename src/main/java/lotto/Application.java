@@ -4,25 +4,31 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
+        try {
+            Input input = new Input();
+            int lottoPurchaseAmount = input.getLottoPurchaseAmount();
 
-        Input input = new Input();
-        int lottoPurchaseAmount = input.getLottoPurchaseAmount();
+            Printer printer = new Printer(lottoPurchaseAmount);
 
-        Printer printer = new Printer(lottoPurchaseAmount);
-        // 로또 생성
-        LottoGenerator lottoGenerator = new LottoGenerator(lottoPurchaseAmount);
-        List<Lotto> generatedLottos = lottoGenerator.getGeneratedLotto();
-        // 생성한 로또 출력
-        printer.printGeneratedLotto(generatedLottos);
+            // 로또 생성
+            LottoGenerator lottoGenerator = new LottoGenerator(lottoPurchaseAmount);
+            List<Lotto> generatedLottos = lottoGenerator.getGeneratedLotto();
 
-        String lottoNumber = input.getLottoNumber();
-        int bonusNumber = input.getBonusNumber();
+            // 생성한 로또 출력
+            printer.printGeneratedLotto(generatedLottos);
 
-        WinningLotto winningLotto = new WinningLotto(lottoNumber);
-        List<Integer> winningLottoNum = winningLotto.getWinningLotto();
+            String lottoNumber = input.getLottoNumber();
+            int bonusNumber = input.getBonusNumber();
 
-        // 로또 결과 출력
-        LottoResult lottoResult = new LottoResult(generatedLottos, winningLottoNum, bonusNumber);
-        printer.printLottoResult(lottoResult);
+            WinningLotto winningLotto = new WinningLotto(lottoNumber);
+            List<Integer> winningLottoNum = winningLotto.getWinningLotto();
+
+            // 로또 결과 출력
+            LottoResult lottoResult = new LottoResult(generatedLottos, winningLottoNum, bonusNumber);
+            printer.printLottoResult(lottoResult);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
