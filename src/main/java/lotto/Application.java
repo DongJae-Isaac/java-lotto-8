@@ -1,16 +1,12 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class Application {
     public static void main(String[] args) {
 
         Input input = new Input();
-        int lottoPurchaseAmount = Integer.parseInt(input.getLottoPurchaseAmount());
+        int lottoPurchaseAmount = input.getLottoPurchaseAmount();
 
         Printer printer = new Printer(lottoPurchaseAmount);
         // 로또 생성
@@ -20,7 +16,7 @@ public class Application {
         printer.printGeneratedLotto(generatedLottos);
 
         String lottoNumber = input.getLottoNumber();
-        int bonusNumber = Integer.parseInt(input.getBonusNumber());
+        int bonusNumber = input.getBonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(lottoNumber);
         List<Integer> winningLottoNum = winningLotto.getWinningLotto();
